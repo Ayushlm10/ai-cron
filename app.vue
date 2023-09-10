@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { useChat } from "ai/vue";
+const source = ref<string>("");
+const { text, copy, copied } = useClipboard({ source });
 
 const { messages, input, handleSubmit } = useChat({
   headers: { "Content-Type": "application/json" },
 });
+function selectedContent(content: string) {
+  source.value = content;
+  copy(source.value);
+}
 </script>
 
 <template>
@@ -21,6 +27,15 @@ const { messages, input, handleSubmit } = useChat({
           Words to cron expression
         </p>
       </div>
+      <Transition name="fade">
+        <button
+          v-if="messages.length > 0"
+          class="flex justify-center items-center text-center mx-auto m-2 px-2 py-2 hover:bg-teal-700 bg-teal-600 rounded-lg transition-opacity duration-500 ease-in-out"
+          @click="messages = []"
+        >
+          Clear messages
+        </button>
+      </Transition>
     </div>
     <div class="flex flex-col w-full max-w-md py-10 mx-auto stretch">
       <span class="text-xl mb-2">I want a cron job that runs:</span>
@@ -33,22 +48,60 @@ const { messages, input, handleSubmit } = useChat({
       </form>
     </div>
     <div class="bg-slate-900">
-      <div
-        v-for="m in messages"
-        key="m.id"
-        class="flex max-w-md items-center justify-center mx-auto rounded-md py-4 m-6"
-        :class="[
-          {
-            'bg-blue-950': m.role !== 'user',
-            'bg-teal-800': m.role === 'user',
-          },
-        ]"
-      >
-        {{ m.role === "user" ? "User: " : " " }}
-        <span class="ml-2 font-bold">
-          {{ m.content }}
-        </span>
-      </div>
+      <TransitionGroup name="fade">
+        <div
+          v-for="m in messages"
+          key="m.id"
+          class="flex max-w-md items-center justify-center mx-auto rounded-md py-4 m-6 relative"
+          :class="[
+            {
+              'bg-blue-950': m.role !== 'user',
+              'bg-teal-800': m.role === 'user',
+            },
+          ]"
+        >
+          {{ m.role === "user" ? "User: " : " " }}
+          <div class="font-bold" @click="selectedContent(m.content)">
+            {{ m.content }}
+          </div>
+          <div
+            v-if="m.role !== 'user'"
+            class="cursor-pointer absolute top-0 right-0 m-2"
+            @click="selectedContent(m.content)"
+          >
+            <CopyIcon />
+            <div
+              v-if="copied && source === m.content"
+              class="absolute top-0 left-0 bg-teal-700 text-gray-200 p-2 rounded-lg mt-4 transition-all"
+            >
+              Copied!
+            </div>
+          </div>
+        </div>
+      </TransitionGroup>
     </div>
   </div>
 </template>
+
+<style>
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+.fade-enter-to {
+  opacity: 1;
+}
+.fade-enter-active {
+  transition: all 0.5s ease;
+}
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+</style>
