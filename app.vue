@@ -10,7 +10,7 @@ const { messages, input, handleSubmit } = useChat({
   <div class="bg-slate-900 max-h-screen w-screen h-screen text-gray-200">
     <div class="m-auto max-w-xl p-4">
       <div
-        class="mt-8 justify-center items-center text-center border-b border-neutral-800 pb-3"
+        class="mt-8 justify-center items-center text-center border-b border-neutral-700 pb-3"
       >
         <h1
           class="font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-teal-400 to-teal-600"
@@ -44,7 +44,7 @@ const { messages, input, handleSubmit } = useChat({
           },
         ]"
       >
-        {{ m.role === "user" ? "Cron expression: " : " " }}
+        {{ m.role === "user" ? "User: " : " " }}
         <span class="ml-2 font-bold">
           {{ m.content }}
         </span>

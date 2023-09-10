@@ -1,20 +1,11 @@
-# Vercel AI SDK, Nuxt and OpenAI Chat Example
+# Cron AI
 
-This example shows how to use the [Vercel AI SDK](https://sdk.vercel.ai/docs) with [Nuxt](https://nuxt.com/), and [OpenAI](https://openai.com) to create a ChatGPT-like AI-powered streaming chat bot.
+This simple app converts natural language to cron expressions.
 
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=ai-sdk-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fai%2Ftree%2Fmain%2Fexamples%2Fnuxt-openai&env=NUXT_OPENAI_API_KEY&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys&project-name=ai-chat&repository-name=nuxt-ai-chat)
+Final looks something like this rn:
+![Alt text](image.png)
 
 ## How to use
-
-Execute `nuxi` to bootstrap the example:
-
-```bash
-npx nuxi@latest init -t github:vercel/ai/examples/nuxt-openai nuxt-openai
-```
 
 To run the example locally you need to:
 
@@ -44,4 +35,4 @@ To learn more about OpenAI, Nuxt, and the Vercel AI SDK take a look at the follo
 - [Vercel AI SDK docs](https://sdk.vercel.ai/docs) - learn mode about the Vercel AI SDK
 - [Vercel AI Playground](https://play.vercel.ai) - compare and tune 20+ AI models side-by-side
 - [OpenAI Documentation](https://platform.openai.com/docs) - learn about OpenAI features and API.
-- [Nuxt Documentation](https://nuxt.com/docs) - learn about Nuxt features and API.
+- [Nuxt Documentation](https://nuxt.com/docs) - learn about Nuxt features and API
