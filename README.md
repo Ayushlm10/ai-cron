@@ -3,7 +3,7 @@
 This simple app converts natural language to cron expressions.
 
 Final looks something like this rn:
-![Alt text](image.png)
+![Alt text](image-1.png)
 
 ## How to use
 
